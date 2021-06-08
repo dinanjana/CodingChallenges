@@ -50,7 +50,4 @@ const openAndClose = async (firstDate, lastDate) => {
     dates.forEach((date) => printData(date));
   }
 };
-
-export default openAndClose;
-
-openAndClose('1-January-2000', '11-January-2014');
+// openAndClose('1-January-2000', '11-January-2014');
