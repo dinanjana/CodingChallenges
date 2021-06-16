@@ -4,7 +4,8 @@
   "description": "Coding challenges done in leet code and hacker rank from time to time",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "start": "nodemon index.js"
   },
   "repository": {
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/dinanjana/CodingChallenges#readme",
   "devDependencies": {
+    "jest": "^27.0.4",
     "nodemon": "^2.0.7"
   }
 }
