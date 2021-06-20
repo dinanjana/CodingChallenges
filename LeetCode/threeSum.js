@@ -1,24 +1,28 @@
 const threeSum = (nums) => {
     const res = [];
-
-    nums.forEach((num, i, arr) => {
-        nums.forEach((secondNum, j) => {
-            if(i <= j) {
-                return;
-            }
-            const twoSum = num + secondNum;
-            const thirdNum = arr.find((num, k) => k !== i && k!==j && (num + twoSum === 0));
-            
-            if (thirdNum !== undefined) { 
-                const potentialEntry = [num, secondNum, thirdNum];
-                const duplicate = res.find(res => arrayEquals(res, potentialEntry));
-                if (!duplicate) {
-                    res.push(potentialEntry);
+    nums
+        .sort((a, b) => a - b)
+        .forEach((firstNum, i) => {
+            nums.forEach((thirdNum, j, arr) => {
+                //console.log(arr)
+                if(j > i + 1) {
+                    const total = firstNum + arr[i + 1] + thirdNum;
+                    if (total === 0) {
+                        let duplicate = false;
+                        const possibleSolution = [firstNum, arr[i + 1], thirdNum]
+                        res.forEach(arr1 => {
+                            if (arrayEquals(arr1, possibleSolution)) {
+                                duplicate = true;
+                            }
+                        });
+                        if(!duplicate) {
+                            res.push(possibleSolution);
+                        }
+                    }
                 }
-            } 
-        })
-    });
-
+            });
+        }); 
+    console.log(res)     
     return res;
 };
 
@@ -32,14 +36,6 @@ const arrayEquals = (arr1, arr2) => {
     return false; 
 };
 
-let res = threeSum([-1,0,1,2,-1,-4]);
-console.log(JSON.stringify(res));
-
-res = threeSum([1,2,-2,-1]);
-console.log(JSON.stringify(res));
-
-res = threeSum([0, 0, 0]);
-console.log(JSON.stringify(res))
-
-res = threeSum([0,3,0,1,1,-1,-5,-5,3,-3,-3,0]);
-console.log(JSON.stringify(res))
+module.exports = {
+    threeSum,
+};

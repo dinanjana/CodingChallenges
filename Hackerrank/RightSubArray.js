@@ -6,3 +6,7 @@ const maxRightSubArray = input => input
 
 let res = maxRightSubArray([2, -1, 50, 12 ,1]);
 console.log(res);
+
+module.exports = {
+    maxRightSubArray
+};
