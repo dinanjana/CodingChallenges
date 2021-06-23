@@ -1,28 +1,21 @@
 const threeSum = (nums) => {
     const res = [];
-    nums
-        .sort((a, b) => a - b)
-        .forEach((firstNum, i) => {
-            nums.forEach((thirdNum, j, arr) => {
-                //console.log(arr)
-                if(j > i + 1) {
-                    const total = firstNum + arr[i + 1] + thirdNum;
-                    if (total === 0) {
-                        let duplicate = false;
-                        const possibleSolution = [firstNum, arr[i + 1], thirdNum]
-                        res.forEach(arr1 => {
-                            if (arrayEquals(arr1, possibleSolution)) {
-                                duplicate = true;
-                            }
-                        });
-                        if(!duplicate) {
-                            res.push(possibleSolution);
-                        }
-                    }
+
+    const arrayAsMap = nums.reduce((acc, num, i) => { acc[num] = i; return acc }, {});
+
+    nums.forEach((num, i) => {
+        for (let j = i + 1; j < nums.length; j++) {
+            const twoSum = num + nums[j];
+            const probableThirdEntry = arrayAsMap[-1 * twoSum];
+            if (probableThirdEntry !== undefined && probableThirdEntry !== i && probableThirdEntry !== j) {
+                const probableNextEntry = [num, nums[j], twoSum !== 0 ? -1 * twoSum : 0];
+                if (!res.find(entry => arrayEquals(entry, probableNextEntry))) {
+                    res.push(probableNextEntry)
                 }
-            });
-        }); 
-    console.log(res)     
+            }
+        }
+    });
+    console.log(res)
     return res;
 };
 
