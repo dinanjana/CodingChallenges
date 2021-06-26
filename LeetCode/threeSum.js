@@ -1,21 +1,31 @@
 const threeSum = (nums) => {
     const res = [];
-
-    const arrayAsMap = nums.reduce((acc, num, i) => { acc[num] = i; return acc }, {});
-
+    nums.sort((a,b) => a - b);
     nums.forEach((num, i) => {
-        for (let j = i + 1; j < nums.length; j++) {
-            const twoSum = num + nums[j];
-            const probableThirdEntry = arrayAsMap[-1 * twoSum];
-            if (probableThirdEntry !== undefined && probableThirdEntry !== i && probableThirdEntry !== j) {
-                const probableNextEntry = [num, nums[j], twoSum !== 0 ? -1 * twoSum : 0];
-                if (!res.find(entry => arrayEquals(entry, probableNextEntry))) {
-                    res.push(probableNextEntry)
+        if(i > 0 && (num === nums[i -1])) {
+            return;
+        }
+        let j = i + 1;
+        let k = nums.length - 1;
+        while(j < k) {
+            if (num + nums[j] + nums[k] === 0) {
+                if (res.length > 0) {
+                    const [ v1, v2, v3 ] = res[res.length -1];
+                    if (v1 !== num || v2 !== nums[j] || v3 !== nums[k]) {
+                        res.push([num, nums[j], nums[k]]);
+                    }
+                } else {
+                    res.push([num, nums[j], nums[k]]);
                 }
+                j++;
+                k--;
+            } else if ((num + nums[j] + nums[k]) > 0) {
+                k--;
+            } else {
+                j++;
             }
         }
     });
-    console.log(res)
     return res;
 };
 
