@@ -29,16 +29,6 @@ const threeSum = (nums) => {
     return res;
 };
 
-const arrayEquals = (arr1, arr2) => {
-    if (arr2) {
-        arr2.sort();
-        return arr1
-            .sort()
-            .reduce((acc, el, i) => el === arr2[i] && acc, true);
-    }
-    return false; 
-};
-
 module.exports = {
     threeSum,
 };
