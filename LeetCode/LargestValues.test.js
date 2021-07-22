@@ -43,16 +43,16 @@ const getDepth = (root, i = 0) => {
     return left > right ? left : right;
 };
 
-const getAllNodesOfGivenDepth = (root, depth, i = 0, nodes = []) => {
+const getAllNodesOfGivenDepth = (root, depth, nodes = []) => {
     if(root === null) {
         return;
     }
-    if(i >= depth) {
+    if(depth === 0) {
         nodes.push(root);
         return nodes;
     }
-    getAllNodesOfGivenDepth(root.left, depth, i + 1, nodes);
-    getAllNodesOfGivenDepth(root.right, depth, i + 1, nodes);
+    getAllNodesOfGivenDepth(root.left, depth - 1, nodes);
+    getAllNodesOfGivenDepth(root.right, depth - 1, nodes);
     return nodes;
 }
 
